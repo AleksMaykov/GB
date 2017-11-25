@@ -9,7 +9,6 @@ class ServerChat(object):
         self._host = host
         self._port = port
         self._sock  = socket.socket()
-        self._sock.bind((str(self._host), self._port))
         self._clients = list()
 
     # def decode(self, message_bytes):
@@ -46,7 +45,7 @@ class ServerChat(object):
 
                 try:
                     responces = responces[client].encode('utf-8')
-                    client.send(responces)
+                    client.send(responces.upper())
 
 
                 except Exception as err:
@@ -60,7 +59,8 @@ class ServerChat(object):
 
     def run(self, how_many_clients):
 
-        self._sock.listen(how_many_clients)
+        self._sock.bind((str(self._host), int(self._port)))
+        self._sock.listen(int (how_many_clients))
         # self._sock.settimeout(0.2)
 
         print('Сервер запущен')
