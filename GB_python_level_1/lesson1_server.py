@@ -27,7 +27,7 @@ class ServerChat(object):
             try:
                 data = client.recv(1024).decode('utf-8')
                 responces[client] = data
-                print(data)
+
 
             except Exception as err:
 
@@ -47,7 +47,7 @@ class ServerChat(object):
                 try:
                     responces = responces[client].encode('utf-8')
                     client.send(responces)
-                    print(responces)
+
 
                 except Exception as err:
 
